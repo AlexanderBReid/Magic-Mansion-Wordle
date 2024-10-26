@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head><title>Magic Mansion Wordle</title></head>
+
+<style>
+body {background-image: linear-gradient(to top right, rgba(255,124,77,0.8), rgba(255,124,77,0.3))}
+
+.map td {
+	text-align: center;
+	width: 190px;
+	height: 190px;
+.map tr {
+	text-align: center;
+	width: 190px;
+	height: 190px;
+.map table {
+	border-spacing: 0;
+	max-width: 10000px;
+	min-width: 10000px;
+	border: 0;
+}
+</style>
+<body>
+<h1>Welcome to Magic Mansion Wordle! (Alpha Build)</h1>
+<hr width = 50%>
+<br>
+<h2>Overview</h2>
+<p>
+Magic Mansion Wordle is a map-building, deck-building, puzzle game.<br>
+That seems like a lot, but once we get the hang of it, it should be a lot of fun. <br>
+<dl>
+<caption>General Overview of Game Elements</caption>
+    <dt>Map-building</dt><dd>Players place down map tiles as they move around and explore, building a new board every game!</dd>
+    <dt>Deck-building</dt><dd>Find Spell Cards as you explore and use them to build the best hand. Test your hand against other players and NPC in thrilling duels!</dd>
+    <dt>Puzzle Game</dt><dd>Gain points by solving a Wordle-style puzzle, using letters found around the map or won from duelling other players.</dd>
+</dl>
+</p>
+
+<h2>How to Play</h2>
+<p>
+Set up:
+<ol>
+<li>Start by shuffling the Map Tiles and Spell Cards</li>
+<li>Each player starts with four Movement Cards: Up, Down, Left Right.</li>
+<li>Each player starts with one of each of the Action Cards: Search, Attack, Puzzle.</li>
+<li>Place the Ballroom map tile in the center of the table and place all Player Tokens on top.</li>
+<li>NPC Tokens do not start on the Map</li>
+<li>Lastly, bring up the Wordle code on a computer and start running the program</li>
+</ol>
+<br>
+Now the game is ready to play!<br>
+The game progresses in Rounds. Each round has 3 phases:
+<ol>
+<li>Movement Phase</li>
+<li>Action Phase</li>
+<li>Resolution Phase</li>
+</ol>
+<dl>
+<dt>Movement Phase</dt>
+    <dd>Each player selects on of their movement cards. When everyone is ready, place your cards down at the same time. This allows players to run away from each other or avoid being followed. NPCs always move randomly (see NPC Rules). <br> 
+Player and NPC tokens are moved accordingly. If a player moves outside a map edge, they draw a map tile and place it down (doors connecting to doors).<br>
+When a new tile is placed, roll 1d4 and add number of letters to that map tile. If a 4 is rolled, also place an NPC on that map tile.<br>
+Note: NPCs cannot place down map tiles. If they choose a direction that would require a new tile, they instead do not move.
+     </dd>
+<dt>Action Phase</dt>
+    <dd>Each player selects an Action card. When ready, everyone reveals their selection at the same time.<br>
+Note: NPCs always choose to Attack if there is someone in the room. Otherwise they just gain 1 Letter upon entering a new room.
+	</dd>
+<dt>Resolution Phase</dt>
+     <dd>Any action that only involves one player, like a Search action or a Puzzle action (see "Puzzle Action" for conditions) can be resolved immediately by the player. <br>
+Actions involving two people (Attack or Puzzle (see condition)) are resolved according to the "Attack Rules"<br>
+When all actions are resolved, progress to the next round and repeat.
+	</dd>
+</dl>
+
+<h3>Rules for Attack</h3>
+<p><pre>
+When one or more player chooses to Duel, all players in the room are drawn into the Duel
+	All players must anti up the Minimum Bet.
+	Minimum Bet is the minimum number of letters a player must wager in a duel.
+	Minimum Bet starts at 1 and increases by 1 every time someone Solves the Puzzle.
+	All bets are placed in the center, letters facing down.
+Before the first Draw, any player in the duel can choose to Raise
+	To Raise, place a number of letters above the minimum bet in the pot
+All other players can either:
+	Call - match the raise number of letters in the pot
+	Fold - turn tail and flee
+		Must still offer up the Minimum Bet
+If a player does not have enough letters to Call: They can Go All In
+		A player who is All In is still in the duel and can still in the whole pot
+	No split pots
+If a player has no letters to meet the Minimum Bet:
+	Can still duel as long as they have spells
+	This player can still win the whole pot if they win the battle
+If a player does not have any spell cards:
+	They must still place the Minimum Bet (if they can).
+	Will take the effect of one card played by their attacker, if attacker chooses to play
+	Basically, you can attack the defenseless
+	Cannot fold and run away if no one is the duel raised beyond the minimum bet
+Draw! When all bets are placed, the duel begins!
+	If only one player chose to Attack:
+		Attacking player chooses a spell and plays it first
+		Defending player can then choose a spell to try to PARRY 
+			PARRYING a spell is based on SPELL TYPE
+				Rock, paper, scissors.
+				Example :If attacker plays a ROCK, defender can play a PAPER spell to PARRY
+				PARRYING a spell negates the effect of the Attacking spell
+				Effect of the Parry spell apply to the attacker
+			COUNTER: 
+				COUNTERING is also based only on SPELL TYPE
+				Rock, paper, scissors
+				Playing a spell of the SAME TYPE Counters that spell
+				COUNTERING a spell negates the effect of both spells
+				I.e. nothing happens
+				Example: Attacker plays ROCK, defender plays ROCK
+				After countering, both players select a SECOND CARD
+	SECOND CARDs are always Drawn at the same time
+		See Attacking at the Same Time below
+Attacking at the Same Time:
+	Two or more players all chose Attack action
+	Each player selects a card from their hand and places face down in front of them
+	Both cards are flipped (Drawn) at the same time
+	The spell with the best SPEED happens first
+		Lower numbers have higher SPEED
+			Ex. Speed of 1 goes before speed of 2
+	Target takes damage or applies effect as specified by the spell
+	If the player with the SLOWER spell is still alive AND still able to attack:
+	The slow spells effect then happens 
+	Target takes damage or applies spell effect as specified by the spell
+	If one player is reduced to zero HP, they are killed and respawn immediately in the Ballroom
+	Loose the letters that they bet, but nothing else
+	If both players are still alive and still in the same room and are still able to cast:
+	Enter the next Round of Betting
+	Subsequent Rounds of Betting/Combat:
+		Both players pick up their played spell cards and return them to their hand
+		Either player can either:
+			Bet - any number of letters
+			Call - meeting the other players bet
+		Continue to next round of combat, both Attacking at the Same Time
+Rounds continue until someone folds or dies
+		Raise - Call and add a bet
+		Fold - Player chooses to pull out of the fight
+			They loose what they bet up to this point, but combat ends
+			Opponent wins the letters that were bet
+Finally, apply Area Effect to the room that resulted from any spells played
+	Each type of effect can only be applied once
+
+After resolving the Duel (attack action):
+	Both players gain Mandatory Movement 
+		Must play a movement card in the next Movement Phase
+
+If in the puzzle room, forces both players Leave the Puzzle Room
+	Clearing their inventory
+Gives a reason to both Puzzle and then duel over the spoils, so at least someone gets something
+</pre></p>
+</p>
+
+<h2>Okay, that is a lot of rules... I swear it isn't too complicated!</h2>
+<p> Here are the spells I have made up so far:
+<img src = "./Images/spells.png" width = "800", height = "450"/>
+</p>
+
+<!-- Map section ----------------------------- -->
+<h2>Here is a mock-up of the map we would play on</h2>
+<div class = "map">
+<table>
+<tr>
+<td><img src = "./Images/MT1.png" height = "20" width = "20" id = "id1"  onclick="scale1()"/></td>
+<td><img src = "./Images/MT2.png" height = "20" width = "20" id = "id2" onclick="scale2()"></td>
+<td><img src = "./Images/MT3.png" height = "20" width = "20" id = "id3" onclick="scale3()"></td>
+<td><img src = "./Images/MT4.png" height = "20" width = "20"  id = "id4" onclick="scale4()"></td>
+</tr>
+<tr>
+<td><img src = "./Images/MT5.png" height = "20" width = "20" id = "id5" onclick="scale5()"></td>
+<td colspan = "2"><img src = "./Images/MBallroom.png" height = "200" width = "400"></td>
+<td><img src = "./Images/MT6.png" height = "20" width = "20" id = "id10" onclick="scale10()"></td>
+</tr>
+<tr>
+<td><img src = "./Images/MT7.png" height = "20" width = "20" id = "id6" onclick= "scale6()"></td>
+<td><img src = "./Images/MT8.png" height = "20" width = "20" id = "id7" onclick= "scale7()"></td>
+<td><img src = "./Images/MT9.png" height = "20" width = "20" id = "id8" onclick= "scale8()"></td>
+<td><img src = "./Images/MT10.png" height = "20" width = "20" id = "id9" onclick= "scale9()"></td>
+</tr>
+<tr><td><img src = "./Images/MPR.png" height = "20" width = "20" id = "id11" onclick= "scale11()"></td>
+</tr>
+</table>
+</div>
+
+
+<!-- -------------------map end ------------------------ -->
+
+
+<script>
+function scale1()
+{
+	var div1 = document.getElementById("id1");
+	
+	div1.style.transform = 'scale(10)';
+	
+}
+
+function scale2()
+{
+	var div1 = document.getElementById("id2");
+	
+	div1.style.transform = 'scale(10)';
+
+}
+function scale3()
+{
+	var div1 = document.getElementById("id3");
+	
+	div1.style.transform = 'scale(10)';
+}
+function scale4()
+{
+	var div1 = document.getElementById("id4");
+	
+	div1.style.transform = 'scale(10)';
+}
+function scale5()
+{
+	var div1 = document.getElementById("id5");
+	
+	div1.style.transform = 'scale(10)';
+}
+function scale6()
+{
+	var div1 = document.getElementById("id6");
+	
+	div1.style.transform = 'scale(10)';
+}
+function scale7()
+{
+	var div1 = document.getElementById("id7");
+	
+	div1.style.transform = 'scale(10)';
+}
+function scale8()
+{
+	var div1 = document.getElementById("id8");
+	
+	div1.style.transform = 'scale(10)';
+}
+function scale9()
+{
+	var div1 = document.getElementById("id9");
+	
+	div1.style.transform = 'scale(10)';
+}
+function scale10()
+{
+	var div1 = document.getElementById("id10");
+	
+	div1.style.transform = 'scale(10)';
+}
+function scale11()
+{
+	var div1 = document.getElementById("id11");
+	
+	div1.style.transform = 'scale(10)';
+}
+</script>
+
+</body></html>
