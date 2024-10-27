@@ -74,29 +74,34 @@ When all actions are resolved, progress to the next round and repeat.
 </dl>
 
 <h3>Rules for Attack</h3>
-<p><pre>
-When one or more player chooses to Duel, all players in the room are drawn into the Duel
-	All players must anti up the Minimum Bet.
-	Minimum Bet is the minimum number of letters a player must wager in a duel.
-	Minimum Bet starts at 1 and increases by 1 every time someone Solves the Puzzle.
-	All bets are placed in the center, letters facing down.
-Before the first Draw, any player in the duel can choose to Raise
-	To Raise, place a number of letters above the minimum bet in the pot
-All other players can either:
-	Call - match the raise number of letters in the pot
-	Fold - turn tail and flee
-		Must still offer up the Minimum Bet
-If a player does not have enough letters to Call: They can Go All In
-		A player who is All In is still in the duel and can still in the whole pot
-	No split pots
-If a player has no letters to meet the Minimum Bet:
-	Can still duel as long as they have spells
-	This player can still win the whole pot if they win the battle
-If a player does not have any spell cards:
-	They must still place the Minimum Bet (if they can).
-	Will take the effect of one card played by their attacker, if attacker chooses to play
-	Basically, you can attack the defenseless
-	Cannot fold and run away if no one is the duel raised beyond the minimum bet
+<p>
+If there are more than one person inside a room after the movement phase, players can choose to play the Attack Action<br>
+	NPCs always choose the Attack action when not alone in a room.<br>
+	<u>If only one player chooses the attack action</u><br>
+	<ul>
+		<li>Attack action overrides all other actions the other players may have taken</li>
+		<li>Player who played the attack action gain <b>First to Go</b></li>
+	</ul>
+	All players must now place the <b>Minimum Bet</b>
+	<ul>
+		<li>Minimum Bet starts at one letter and increases by one after each puzzle is solved</li>
+		<li>To bet, place Letters found around the map into the Pot</li>
+		<li>If a player cannot afford the Minimum Bet, they can join the duel for free.</li>
+		<ul><li>Player is automatically <b>All In</b>.</li></ul>
+	</ul>
+	Any players can then Raise if they want to, adding more letters to the Pot.<br>
+	All other players must then either Call, Raise, or Fold (or go All In, if out of letters)
+	<ul><li><b>Call</b> - Match the amount raised.</li>
+		<li><b>Raise</b> - Add more on top of the amount raised.</li>
+		<li><b>Fold</b> - Back out of the Duel. Loose the letters you had put in the pot till now.</li>
+		<li><b>All In</b> - If a player is in a duel and out of letters to meet a bet, <br>
+				if that player looses the duel, the winner of the duel can take <br>
+				one spell card from their hand.<br>
+				Can either keep it or discard it.</li></ul>
+	If a player is attacked and does not have any spell cards
+	<ul><li>Player cannot defend themselves!</li>
+		<li>Attacker gets to play one spell card, then the attack action ends.</li></ul>
+	<pre>
 Draw! When all bets are placed, the duel begins!
 	If only one player chose to Attack:
 		Attacking player chooses a spell and plays it first
