@@ -1,270 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head><title>Magic Mansion Wordle</title></head>
-
-<style>
-body {background-image: linear-gradient(to top right, rgba(255,124,77,0.8), rgba(255,124,77,0.3))}
-
-.map td {
-	text-align: center;
-	width: 190px;
-	height: 190px;
-.map tr {
-	text-align: center;
-	width: 190px;
-	height: 190px;
-.map table {
-	border-spacing: 0;
-	max-width: 10000px;
-	min-width: 10000px;
-	border: 0;
-}
-</style>
-<body>
-<h1>Welcome to Magic Mansion Wordle! (Alpha Build)</h1>
-<hr width = 50%>
-<br>
-<h2>Overview</h2>
-<p>
-Magic Mansion Wordle is a map-building, deck-building, puzzle game.<br>
-That seems like a lot, but once we get the hang of it, it should be a lot of fun. <br>
-<dl>
-<caption>General Overview of Game Elements</caption>
-    <dt>Map-building</dt><dd>Players place down map tiles as they move around and explore, building a new board every game!</dd>
-    <dt>Deck-building</dt><dd>Find Spell Cards as you explore and use them to build the best hand. Test your hand against other players and NPC in thrilling duels!</dd>
-    <dt>Puzzle Game</dt><dd>Gain points by solving a Wordle-style puzzle, using letters found around the map or won from duelling other players.</dd>
-</dl>
-</p>
-
-<h2>How to Play</h2>
-<p>
-Set up:
 <ol>
-<li>Start by shuffling the Map Tiles and Spell Cards</li>
-<li>Each player starts with four Movement Cards: Up, Down, Left Right.</li>
-<li>Each player starts with one of each of the Action Cards: Search, Attack, Puzzle.</li>
-<li>Place the Ballroom map tile in the center of the table and place all Player Tokens on top.</li>
-<li>NPC Tokens do not start on the Map</li>
-<li>Lastly, bring up the Wordle code on a computer and start running the program</li>
+<caption>Table of Contents</caption>
+	<li>Overview: What is MMW?</li>
+	<li>Example Gameplay</li>
+	<li>The Rules</li>
 </ol>
+<hr width = "50%">
 <br>
-Now the game is ready to play!<br>
-The game progresses in Rounds. Each round has 3 phases:
-<ol>
-<li>Movement Phase</li>
-<li>Action Phase</li>
-<li>Resolution Phase</li>
-</ol>
-<dl>
-<dt>Movement Phase</dt>
-    <dd>Each player selects on of their movement cards. When everyone is ready, place your cards down at the same time. This allows players to run away from each other or avoid being followed. NPCs always move randomly (see NPC Rules). <br> 
-Player and NPC tokens are moved accordingly. If a player moves outside a map edge, they draw a map tile and place it down (doors connecting to doors).<br>
-When a new tile is placed, roll 1d4 and add number of letters to that map tile. If a 4 is rolled, also place an NPC on that map tile.<br>
-Note: NPCs cannot place down map tiles. If they choose a direction that would require a new tile, they instead do not move.
-     </dd>
-<dt>Action Phase</dt>
-    <dd>Each player selects an Action card. When ready, everyone reveals their selection at the same time.<br>
-Note: NPCs always choose to Attack if there is someone in the room. Otherwise they just gain 1 Letter upon entering a new room.
-	</dd>
-<dt>Resolution Phase</dt>
-     <dd>Any action that only involves one player, like a Search action or a Puzzle action (see "Puzzle Action" for conditions) can be resolved immediately by the player. <br>
-Actions involving two people (Attack or Puzzle (see condition)) are resolved according to the "Attack Rules"<br>
-When all actions are resolved, progress to the next round and repeat.
-	</dd>
-</dl>
-
-<h3>Rules for Attack</h3>
+<h1>Overview: What is MMW?</h1>
+	<p>
+		Magic Mansion Worle (MMW) is a *deep breath* Map Building, Deck Building, Wizard Dueling, Puzzle Game! <br>
+		It sounds more complicated than it is. The main rules will be intuitive because MMW is based on three games: <br>
+		<ol>
+			<li>Rock Paper Scissors (dueling system)</li>
+			<li>Poker (betting system)</li>
+			<li>Worldle (puzzle system)</li>
+		</ol>
+		First, let's get a handle on the big picture: <br>
+		<dl>
+			<dt>Overall Objective</dt><dd>The player with the most points at the end of the game wins. Points are gained by solving the puzzle, so the player who solves the puzzle the most times wins! (In the base game mode)</dd>
+			<dt>Exploration and Resource Gathering</dt><dd>Players place down Map Tiles as they move around, building a unique map each game. Each room will have some Letters in it. Successfully Search rooms to gather letters and gain Spell Cards.</dd>
+			<dt>Three Phases per Round</dt><dd>The game procedes in Rounds, with three phases per round: 
+			<ol>
+				<li>Movement Phase: All players select a Movement Card and reveal at the same time. Then all player tokens are moved accordingly.</li>
+				<li>Action Phase: All players select an Action Card and reveal at the same time. There are three actions: Search, Duel, Puzzle. If two or more players are in the same room, and one player chooses to Duel, then everyone is drawn into the duel.</li>
+				<li>Resolution Phase: Players resolve the actions they selected, either rolling to see what they find, attempting the puzzle, or entering into a Wizard Duel. Once all actions have been completed, the next round begins!</li>
+			</ol></dd>
+			<dt>Dueling</dt><dd>If you find yourself in the same room as another player, watch out for Wizard Duels! Wizards (you players) duel using the hand of spell cards build up and currated by exploring around the map. Each spell has a type (it's Rock Paper Scissors) and players will bet (like poker) on the outcome of the duel, using the letters you've collected from around the map.</dd>
+			<dt>Puzzling</dt><dd>Once a player has enough letters that they think they can solve The Puzzle, they must make their way to (or find) the puzzle room. One in the puzzle room, the player's collection of letters can be used to attempt to solve a Christmas-themed Wordle. Each time a player enters the puzzle room, they five attempts at the puzzle. If they don't solve the puzzle, any correct letters remains in the puzzle, making it easier for the next person to solve. Get the right letters and guess the right word first to get points!</dd>
+			<dt>Escallation</dt><dd>Each time someone solves the puzzle, the next puzzle gets harder by one letter and the Minimum Bet (for dueling) increase by one letter. The board tiles are also refreshed and NPCs may spawn.</dd>
+		</dl>
+<br><br>
+	Okay, things are starting to get a little complicated and there are more than a few rules. But have no fear! Read through the following Example Gameplay to get a feel for how the game works.
+	</p>
+<hr>
+<h1>Example Gameplay</h1>
 <p>
-If there are more than one person inside a room after the movement phase, players can choose to play the Attack Action<br>
-	NPCs always choose the Attack action when not alone in a room.<br>
-	<u>If only one player chooses the attack action</u><br>
-	<ul>
-		<li>Attack action overrides all other actions the other players may have taken</li>
-		<li>Player who played the attack action gain <b>First to Go</b></li>
-	</ul>
-	All players must now place the <b>Minimum Bet</b>
-	<ul>
-		<li>Minimum Bet starts at one letter and increases by one after each puzzle is solved</li>
-		<li>To bet, place Letters found around the map into the Pot</li>
-		<li>If a player cannot afford the Minimum Bet, they can join the duel for free.</li>
-		<ul><li>Player is automatically <b>All In</b>.</li></ul>
-	</ul>
-	Any players can then Raise if they want to, adding more letters to the Pot.<br>
-	All other players must then either Call, Raise, or Fold (or go All In, if out of letters)
-	<ul><li><b>Call</b> - Match the amount raised.</li>
-		<li><b>Raise</b> - Add more on top of the amount raised.</li>
-		<li><b>Fold</b> - Back out of the Duel. Loose the letters you had put in the pot till now.</li>
-		<li><b>All In</b> - If a player is in a duel and out of letters to meet a bet, <br>
-				if that player looses the duel, the winner of the duel can take <br>
-				one spell card from their hand.<br>
-				Can either keep it or discard it.</li></ul>
-	If a player is attacked and does not have any spell cards
-	<ul><li>Player cannot defend themselves!</li>
-		<li>Attacker gets to play one spell card, then the attack action ends.</li></ul>
-	<pre>
-Draw! When all bets are placed, the duel begins!
-	If only one player chose to Attack:
-		Attacking player chooses a spell and plays it first
-		Defending player can then choose a spell to try to PARRY 
-			PARRYING a spell is based on SPELL TYPE
-				Rock, paper, scissors.
-				Example :If attacker plays a ROCK, defender can play a PAPER spell to PARRY
-				PARRYING a spell negates the effect of the Attacking spell
-				Effect of the Parry spell apply to the attacker
-			COUNTER: 
-				COUNTERING is also based only on SPELL TYPE
-				Rock, paper, scissors
-				Playing a spell of the SAME TYPE Counters that spell
-				COUNTERING a spell negates the effect of both spells
-				I.e. nothing happens
-				Example: Attacker plays ROCK, defender plays ROCK
-				After countering, both players select a SECOND CARD
-	SECOND CARDs are always Drawn at the same time
-		See Attacking at the Same Time below
-Attacking at the Same Time:
-	Two or more players all chose Attack action
-	Each player selects a card from their hand and places face down in front of them
-	Both cards are flipped (Drawn) at the same time
-	The spell with the best SPEED happens first
-		Lower numbers have higher SPEED
-			Ex. Speed of 1 goes before speed of 2
-	Target takes damage or applies effect as specified by the spell
-	If the player with the SLOWER spell is still alive AND still able to attack:
-	The slow spells effect then happens 
-	Target takes damage or applies spell effect as specified by the spell
-	If one player is reduced to zero HP, they are killed and respawn immediately in the Ballroom
-	Loose the letters that they bet, but nothing else
-	If both players are still alive and still in the same room and are still able to cast:
-	Enter the next Round of Betting
-	Subsequent Rounds of Betting/Combat:
-		Both players pick up their played spell cards and return them to their hand
-		Either player can either:
-			Bet - any number of letters
-			Call - meeting the other players bet
-		Continue to next round of combat, both Attacking at the Same Time
-Rounds continue until someone folds or dies
-		Raise - Call and add a bet
-		Fold - Player chooses to pull out of the fight
-			They loose what they bet up to this point, but combat ends
-			Opponent wins the letters that were bet
-Finally, apply Area Effect to the room that resulted from any spells played
-	Each type of effect can only be applied once
-
-After resolving the Duel (attack action):
-	Both players gain Mandatory Movement 
-		Must play a movement card in the next Movement Phase
-
-If in the puzzle room, forces both players Leave the Puzzle Room
-	Clearing their inventory
-Gives a reason to both Puzzle and then duel over the spoils, so at least someone gets something
-</pre></p>
+	At this point in the game, the players have moved around a bit, expanded the map, collected a 'hand' of three Spell Cards, and gathered a few Letters. Top of the round!
 </p>
-
-<h2>Okay, that is a lot of rules... I swear it isn't too complicated!</h2>
-<p> Here are the spells I have made up so far:
-<img src = "./images/spells.png" width = "800", height = "450"/>
-</p>
-
-<!-- Map section ----------------------------- -->
-<h2>Here is a mock-up of the map we would play on</h2>
-<div class = "map">
 <table>
-<tr>
-<td><img src = "./images/MT1.png" height = "20" width = "20" id = "id1"  onclick="scale1()"/></td>
-<td><img src = "./images/MT2.png" height = "20" width = "20" id = "id2" onclick="scale2()"></td>
-<td><img src = "./images/MT3.png" height = "20" width = "20" id = "id3" onclick="scale3()"></td>
-<td><img src = "./images/MT4.png" height = "20" width = "20"  id = "id4" onclick="scale4()"></td>
-</tr>
-<tr>
-<td><img src = "./images/MT5.png" height = "20" width = "20" id = "id5" onclick="scale5()"></td>
-<td colspan = "2"><img src = "./images/MBallroom.png" height = "200" width = "400"></td>
-<td><img src = "./images/MT6.png" height = "20" width = "20" id = "id10" onclick="scale10()"></td>
-</tr>
-<tr>
-<td><img src = "./images/MT7.png" height = "20" width = "20" id = "id6" onclick= "scale6()"></td>
-<td><img src = "./images/MT8.png" height = "20" width = "20" id = "id7" onclick= "scale7()"></td>
-<td><img src = "./images/MT9.png" height = "20" width = "20" id = "id8" onclick= "scale8()"></td>
-<td><img src = "./images/MT10.png" height = "20" width = "20" id = "id9" onclick= "scale9()"></td>
-</tr>
-<tr><td><img src = "./images/MPR.png" height = "20" width = "20" id = "id11" onclick= "scale11()"></td>
-</tr>
+	<tr, colspan="2"><td>In the Movement Phase, both Harry and Ron reveal their Movement Cards. Harry selected 'Down' and Ron selected 'Up'. After they move their player token they find themselves in the same room.</td></tr>
+	
+	
 </table>
-</div>
-
-
-<!-- -------------------map end ------------------------ -->
-
-
-<script>
-function scale1()
-{
-	var div1 = document.getElementById("id1");
-	
-	div1.style.transform = 'scale(10)';
-	
-}
-
-function scale2()
-{
-	var div1 = document.getElementById("id2");
-	
-	div1.style.transform = 'scale(10)';
-
-}
-function scale3()
-{
-	var div1 = document.getElementById("id3");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale4()
-{
-	var div1 = document.getElementById("id4");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale5()
-{
-	var div1 = document.getElementById("id5");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale6()
-{
-	var div1 = document.getElementById("id6");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale7()
-{
-	var div1 = document.getElementById("id7");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale8()
-{
-	var div1 = document.getElementById("id8");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale9()
-{
-	var div1 = document.getElementById("id9");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale10()
-{
-	var div1 = document.getElementById("id10");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale11()
-{
-	var div1 = document.getElementById("id11");
-	
-	div1.style.transform = 'scale(10)';
-}
-</script>
 
 </body></html>
