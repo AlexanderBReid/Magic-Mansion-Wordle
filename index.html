@@ -404,9 +404,9 @@ The Rules
 						<div class = "middle3">
 <h2>Solving the Puzzle</h2>		
 <p>
-	When a player feels like they have the letters they might need to solve the puzzle, they can make their way to the Puzzle Room and attempt to solve the puzzle.
+	When a player feels like they have the letters they might need to solve the puzzle, they can make their way to the Puzzle Room and attempt to solve the puzzle.<br><br>
+	To solve the puzzle:
 	<ul>
-	<caption>To solve the puzzle:</caption>
 		<li>When in the puzzle room, choose the Puzzle Action.</li>
 		<li>If another player in the puzzle room chooses to duel, then the puzzle action is negated.</li>
 		<li>If more than one player chooses the puzzle action, they can choose to either:</li>
@@ -421,9 +421,8 @@ The Rules
 		<li>Upon being ejected, the player must discard all their letters and respawn in the Ballroom.</li>
 		<li>Any progress made on the puzzle is saved, giving the next player a better chance of being able to solve it.</li>
 	</ul>
-
+Whenever the puzzle is solved:
 <ul>
-	<caption>Whenever the puzzle is solved:</caption>
 	<li>The player who solved it gains 1 point.</li>
 	<li>The puzzle advances automatically, with each subsequent word being one letter longer.</li>
 	<li>The board is refreshed:</li>
@@ -432,9 +431,8 @@ The Rules
 	<li>Increase the Minimum Bet by 1 letter.</li></ul>
 	<li>OPTION: Complete reset upon puzzle completion. All players return to their ballroom and all letters are discarded.</li>
 </ul>
-
+Team Puzzling: If more than one player chooses to attempt the puzzle at the same time, they can choose to solve it as a team.
 <ul>
-	<caption>Team Puzzling: If more than one player chooses to attempt the puzzle at the same time, they can choose to solve it as a team.</caption>
 	<li>Both players' letters form a common pool of letters that can be used to solve the puzzle.</li>
 	<li>Players must alternate inputting guesses.</li>
 	<li>Only the player who enters in the correct guess gains the point.</li>
@@ -451,6 +449,41 @@ Any number of players can exchange letters at the same time without conflict.
 							</div>
 								<br>
 							<div class = "middle3">
+<h2>Moving and Searching</h2>
+<h3>Moving</h3>
+<p>
+	During the movement phase, all players reveal their choice of movement direction at the same time.<br>
+	Movement directions are always relative to the orientation of the Ballroom tile.<br>
+	<ul><caption>Players can choose to move in any direciton, as long as:</caption>
+	<li>The current map tile has a door facing in that direction</li>
+	<li>The map tile the player would move into has a door connected to a door on the current tile. (in other words, must move bewteen rooms at points where the doors connect).</li>
+	</ul>
+	If there is no map tile out a door, draw the top map tile from the pile and add one with the doors connecting.<br>
+	After placing a new tile, fill in the letter spaces on the tile with letters, faced down.<br>
+	If the tile has an NPC box on it, roll 1d6 to see if an NPC spaws:
+	<ul>
+		<li>1: Spawn a Hunter. Hunters will always move towards the nearest player and always choose to duel when applicable..</li>
+		<li>2-5: Spawn a Normal NPC. Normal NPCs move randomly and always choose the duel action, when applicable.</li>
+		<li>6: Spawn a Friend. Friendly NPCs will not attack, but will defend themselves. Friends move randomly.</li>
+	</ul>
+								
+	If more than one player chooses to move in a direction that would add a map tile, work it out which way to place the drawn map tile.<br>
+	If there are no more map tiles, then treat doors to the void as walls.<br><br>
+	If a player chooses to Move an extra space as their move action, they may do so only if they are not in a room with someone who chose to duel. All players in the room are drawn into a duel, cancelling all other actions.							
+</p>
+<h3>Searching</h3>								
+<p>
+	Any room a player has moved into during the current round can be searched.<br>
+	After playing the Search action card, roll 1d6:
+	<ul>
+		<li>1-2: Take one letter from the letters on the tile. If there are no more letters on the tile, you cannot gain letters from this search action.</li>
+		<li>3-4: Take one letter from those on the tile and draw a Spell Card.</li>
+		<li>5-6: Take two letters from the tile and draw a Spell Card.</li>
+	</ul>
+	If more than one player chooses to search the same room, but there are not enough letters for each player on the tile, then split the letters up evenly. (if it is not possible to split them evenly, then work something out. Maybe fight each other).							
+</p>							</div>
+								<br>
+							<div class = "middle3">
 <h2>Alternative Gamemodes</h2>
 <h3>Playing with Teams</h3>
 <p>
@@ -462,4 +495,5 @@ Any number of players can exchange letters at the same time without conflict.
 <p>
 	There is also the option to play against the NPCs, trying to Solve the Puzzle as many times as you can before the NPCs hunt down all the player characters.
 </p>	
+							</div>
 </body></html>
