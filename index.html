@@ -1,270 +1,814 @@
+<!-- 
+Notes: 
+	Removed Area/Room effects
+	Add Random Events (Christmas theme)
+	Update NPCs
+	*Attach links to download game files (excel sheet, C files, pdfs, etc. Store on github page)
+	Add Letter Exchange Room
+-->
+
 <!DOCTYPE html>
 <html>
 <head><title>Magic Mansion Wordle</title></head>
 
 <style>
-body {background-image: linear-gradient(to top right, rgba(255,124,77,0.8), rgba(255,124,77,0.3))}
-
-.map td {
-	text-align: center;
-	width: 190px;
-	height: 190px;
-.map tr {
-	text-align: center;
-	width: 190px;
-	height: 190px;
-.map table {
-	border-spacing: 0;
-	max-width: 10000px;
-	min-width: 10000px;
-	border: 0;
-}
+	
+	.toc {
+		background-color: rgba(255,255,255,0.95);
+		margin-left: 25%;
+		margin-right: 25%;
+		text-align: center;
+	}
+	.middle1 {
+		background-color: rgba(255,255,255,0.95);
+		padding-left: 5%;
+		padding-right: 5%;
+		padding-top: 1%;
+		padding-bottom: 1%;
+		border: 1;
+	}
+	.middle2 {
+		background-color: rgba(255,255,255,0.95);
+		padding-left: 5%;
+		padding-right: 5%;
+		padding-top: 1%;
+		padding-bottom: 1%;
+	}
+	.middle3 {
+		background-color: rgba(255,255,255,0.95);
+		padding-left: 5%;
+		padding-right: 5%;
+		padding-top: 1%;
+		padding-bottom: 1%;
+	}
+	.back1 {
+		background-image: url("https://wallpaperset.com/w/full/1/0/1/448905.jpg");
+		background-attachment: fixed;
+		padding-left: 8%;
+		padding-right: 8%;
+	}
+	h2 {
+		text-align: center;
+	}
 </style>
-<body>
-<h1>Welcome to Magic Mansion Wordle! (Alpha Build)</h1>
-<hr width = 50%>
-<br>
-<h2>Overview</h2>
-<p>
-Magic Mansion Wordle is a map-building, deck-building, puzzle game.<br>
-That seems like a lot, but once we get the hang of it, it should be a lot of fun. <br>
-<dl>
-<caption>General Overview of Game Elements</caption>
-    <dt>Map-building</dt><dd>Players place down map tiles as they move around and explore, building a new board every game!</dd>
-    <dt>Deck-building</dt><dd>Find Spell Cards as you explore and use them to build the best hand. Test your hand against other players and NPC in thrilling duels!</dd>
-    <dt>Puzzle Game</dt><dd>Gain points by solving a Wordle-style puzzle, using letters found around the map or won from duelling other players.</dd>
-</dl>
+
+
+	
+<body class = "back1">
+
+
+	
+					<div class = "toc">					
+<h1>Magic Mansion Wordle</h1>
+					
+<p>	
+Table of Contents<br>
+Overview: What is MMW?<br>
+Example Gameplay<br>
+The Rules
+
 </p>
 
-<h2>How to Play</h2>
-<p>
-Set up:
-<ol>
-<li>Start by shuffling the Map Tiles and Spell Cards</li>
-<li>Each player starts with four Movement Cards: Up, Down, Left Right.</li>
-<li>Each player starts with one of each of the Action Cards: Search, Attack, Puzzle.</li>
-<li>Place the Ballroom map tile in the center of the table and place all Player Tokens on top.</li>
-<li>NPC Tokens do not start on the Map</li>
-<li>Lastly, bring up the Wordle code on a computer and start running the program</li>
-</ol>
-<br>
-Now the game is ready to play!<br>
-The game progresses in Rounds. Each round has 3 phases:
-<ol>
-<li>Movement Phase</li>
-<li>Action Phase</li>
-<li>Resolution Phase</li>
-</ol>
-<dl>
-<dt>Movement Phase</dt>
-    <dd>Each player selects on of their movement cards. When everyone is ready, place your cards down at the same time. This allows players to run away from each other or avoid being followed. NPCs always move randomly (see NPC Rules). <br> 
-Player and NPC tokens are moved accordingly. If a player moves outside a map edge, they draw a map tile and place it down (doors connecting to doors).<br>
-When a new tile is placed, roll 1d4 and add number of letters to that map tile. If a 4 is rolled, also place an NPC on that map tile.<br>
-Note: NPCs cannot place down map tiles. If they choose a direction that would require a new tile, they instead do not move.
-     </dd>
-<dt>Action Phase</dt>
-    <dd>Each player selects an Action card. When ready, everyone reveals their selection at the same time.<br>
-Note: NPCs always choose to Attack if there is someone in the room. Otherwise they just gain 1 Letter upon entering a new room.
-	</dd>
-<dt>Resolution Phase</dt>
-     <dd>Any action that only involves one player, like a Search action or a Puzzle action (see "Puzzle Action" for conditions) can be resolved immediately by the player. <br>
-Actions involving two people (Attack or Puzzle (see condition)) are resolved according to the "Attack Rules"<br>
-When all actions are resolved, progress to the next round and repeat.
-	</dd>
-</dl>
+						</div>
+						<br>
+						<br>
+				<div class = "middle1">
 
-<h3>Rules for Attack</h3>
+<!-- --------------------------------------------------------------------------- -->
+
+	
+<h2>Overview: What is MMW?</h2>
+	<p>
+		Magic Mansion Wordle (MMW) is a *deep breath* Map Building, Deck Building, Wizard Dueling, Puzzle Game! <br>
+		It sounds more complicated than it is. The main rules will be intuitive because MMW is based on three games:
+		<ol>
+			<li>Rock Paper Scissors (dueling system)</li>
+			<li>Poker (betting system)</li>
+			<li>Wordle (puzzle system)</li>
+		</ol>
+		First, let's get a handle on the big picture: <br>
+		<dl>
+			<dt>Overall Objective</dt><dd>The player with the most points at the end of the game wins. Points are gained by solving the puzzle, so the player who solves the puzzle the most times wins! (In the base game mode)</dd>
+			<dt>Exploration and Resource Gathering</dt><dd>Players place down Map Tiles as they move around, building a unique map each game. Each room will have some (scrabble) Letters in it. Successfully Search rooms to gather letters and gain Spell Cards.</dd>
+			<dt>Three Phases per Round</dt><dd>The game procedes in Rounds, with three phases per round: 
+			<ol>
+				<li>Movement Phase: All players select a Movement Card and reveal at the same time. Then all player tokens are moved accordingly.</li>
+				<li>Action Phase: All players select an Action Card and reveal at the same time. There are four actions: Search, Duel, Puzzle, Move.</li>
+				<li>Resolution Phase: Players resolve the actions they selected, either rolling to see what they find, attempting the puzzle, entering into a Wizard Duel, or moving an extra space. The only catch is that is any one player in a room chooses to Duel, all other actions are negated (including the Move action) and everyone is drawn into a duel. Once all actions have been completed, the next round begins!</li>
+			</ol></dd>
+			<dt>Dueling</dt><dd>If you find yourself in the same room as another player, watch out for Wizard Duels! Wizards (the players) duel using your hand of spell cards build up by exploring around the map. Each spell has a type (it's Rock Paper Scissors) and players will bet (like poker) on the outcome of the duel, using the letters you've collected from around the map.</dd>
+			<dt>Puzzling</dt><dd>Once in a player has enough letters that they think they can solve The Puzzle, they must make their way to (or find) the puzzle room. One in the puzzle room, the player's collection of letters can be used to attempt to solve a Christmas-themed Wordle. Each time a player enters the puzzle room, they have four attempts at the puzzle. If they don't solve the puzzle, any progress they may have made is saved and passed on to the next player, making it easier for the next person to solve. Get the right letters and guess the right word first to get points!</dd>
+			<dt>Escallation</dt><dd>Each time someone solves the puzzle, the puzzle gets harder by one letter and the Minimum Bet (for dueling) increase by one letter. The board tiles are also refreshed and NPCs may spawn.</dd>
+		</dl>
+<br><br>
+	Okay, things are starting to get a little complicated and there are more than a few rules. But have no fear! Read through the following example gameplays to get a feel for how dueling works.
+	</p>
+
+
+					
+						</div>
+						<br>
+						<br>
+
+
+
+
+<!-- --------------------------------------------------------------------------- -->
+
+						<div class = "middle2">
+	
+<h2>Example Gameplay</h2>
+
+<h3>Example 1: Basic Duel</h3>
+<h4>Note: Spell cards used in example are old versions and are subject to change</h4>
 <p>
-If there are more than one person inside a room after the movement phase, players can choose to play the Attack Action<br>
-	NPCs always choose the Attack action when not alone in a room.<br>
-	<u>If only one player chooses the attack action</u><br>
+	Up to this point in the game, Ron and Harry have travelled around the map a bit, built up a 'hand' of spell cards and collected some letters. During the Movement Phase of the current round, Ron and Harry end up moving into the same room.<br>
+	During the Action Phase, Harry chooses to <i>Search</i> and Ron chooses to <i>Duel</i>. The duel action cancels any other actions in that room. At the start of the duel, the player's have:
 	<ul>
-		<li>Attack action overrides all other actions the other players may have taken</li>
-		<li>Player who played the attack action gain <b>First to Go</b></li>
+		<li>Harry</li>
+		<ul>
+			<li>Spell Cards:<br> <img src= "./images/avis.png" width = "175px" height = "100px"/>
+				<img src= "./images/incendio.png" width = "175px" height = "100px"/>
+			<img src= "./images/opugno.png" width = "175px" height = "100px"/></li>
+			<li>Letters: 6</li>
+			<li>Current HP: 5</li>
+		</ul>
+		<li>Ron</li>
+		<ul>
+			<li>Spell Cards:<br> <img src= "./images/serpensortia.png" width = "175px" height = "100px"/>
+				<img src= "./images/batbogeyhex.png" width = "175px" height = "100px"/>
+			<img src= "./images/bombardi.png" width = "175px" height = "100px"/></li>
+			<li>Letters: 10</li>
+			<li>Current HP: 6</li>
+		</ul>
 	</ul>
-	All players must now place the <b>Minimum Bet</b>
-	<ul>
-		<li>Minimum Bet starts at one letter and increases by one after each puzzle is solved</li>
-		<li>To bet, place Letters found around the map into the Pot</li>
-		<li>If a player cannot afford the Minimum Bet, they can join the duel for free.</li>
-		<ul><li>Player is automatically <b>All In</b>.</li></ul>
-	</ul>
-	Any players can then Raise if they want to, adding more letters to the Pot.<br>
-	All other players must then either Call, Raise, or Fold (or go All In, if out of letters)
-	<ul><li><b>Call</b> - Match the amount raised.</li>
-		<li><b>Raise</b> - Add more on top of the amount raised.</li>
-		<li><b>Fold</b> - Back out of the Duel. Loose the letters you had put in the pot till now.</li>
-		<li><b>All In</b> - If a player is in a duel and out of letters to meet a bet, <br>
-				if that player looses the duel, the winner of the duel can take <br>
-				one spell card from their hand.<br>
-				Can either keep it or discard it.</li></ul>
-	If a player is attacked and does not have any spell cards
-	<ul><li>Player cannot defend themselves!</li>
-		<li>Attacker gets to play one spell card, then the attack action ends.</li></ul>
-	<pre>
-Draw! When all bets are placed, the duel begins!
-	If only one player chose to Attack:
-		Attacking player chooses a spell and plays it first
-		Defending player can then choose a spell to try to PARRY 
-			PARRYING a spell is based on SPELL TYPE
-				Rock, paper, scissors.
-				Example :If attacker plays a ROCK, defender can play a PAPER spell to PARRY
-				PARRYING a spell negates the effect of the Attacking spell
-				Effect of the Parry spell apply to the attacker
-			COUNTER: 
-				COUNTERING is also based only on SPELL TYPE
-				Rock, paper, scissors
-				Playing a spell of the SAME TYPE Counters that spell
-				COUNTERING a spell negates the effect of both spells
-				I.e. nothing happens
-				Example: Attacker plays ROCK, defender plays ROCK
-				After countering, both players select a SECOND CARD
-	SECOND CARDs are always Drawn at the same time
-		See Attacking at the Same Time below
-Attacking at the Same Time:
-	Two or more players all chose Attack action
-	Each player selects a card from their hand and places face down in front of them
-	Both cards are flipped (Drawn) at the same time
-	The spell with the best SPEED happens first
-		Lower numbers have higher SPEED
-			Ex. Speed of 1 goes before speed of 2
-	Target takes damage or applies effect as specified by the spell
-	If the player with the SLOWER spell is still alive AND still able to attack:
-	The slow spells effect then happens 
-	Target takes damage or applies spell effect as specified by the spell
-	If one player is reduced to zero HP, they are killed and respawn immediately in the Ballroom
-	Loose the letters that they bet, but nothing else
-	If both players are still alive and still in the same room and are still able to cast:
-	Enter the next Round of Betting
-	Subsequent Rounds of Betting/Combat:
-		Both players pick up their played spell cards and return them to their hand
-		Either player can either:
-			Bet - any number of letters
-			Call - meeting the other players bet
-		Continue to next round of combat, both Attacking at the Same Time
-Rounds continue until someone folds or dies
-		Raise - Call and add a bet
-		Fold - Player chooses to pull out of the fight
-			They loose what they bet up to this point, but combat ends
-			Opponent wins the letters that were bet
-Finally, apply Area Effect to the room that resulted from any spells played
-	Each type of effect can only be applied once
-
-After resolving the Duel (attack action):
-	Both players gain Mandatory Movement 
-		Must play a movement card in the next Movement Phase
-
-If in the puzzle room, forces both players Leave the Puzzle Room
-	Clearing their inventory
-Gives a reason to both Puzzle and then duel over the spoils, so at least someone gets something
-</pre></p>
 </p>
 
-<h2>Okay, that is a lot of rules... I swear it isn't too complicated!</h2>
-<p> Here are the spells I have made up so far:
-<img src = "./images/spells.png" width = "800", height = "450"/>
-</p>
 
-<!-- Map section ----------------------------- -->
-<h2>Here is a mock-up of the map we would play on</h2>
-<div class = "map">
-<table>
-<tr>
-<td><img src = "./images/MT1.png" height = "20" width = "20" id = "id1"  onclick="scale1()"/></td>
-<td><img src = "./images/MT2.png" height = "20" width = "20" id = "id2" onclick="scale2()"></td>
-<td><img src = "./images/MT3.png" height = "20" width = "20" id = "id3" onclick="scale3()"></td>
-<td><img src = "./images/MT4.png" height = "20" width = "20"  id = "id4" onclick="scale4()"></td>
-</tr>
-<tr>
-<td><img src = "./images/MT5.png" height = "20" width = "20" id = "id5" onclick="scale5()"></td>
-<td colspan = "2"><img src = "./images/MBallroom.png" height = "200" width = "400"></td>
-<td><img src = "./images/MT6.png" height = "20" width = "20" id = "id10" onclick="scale10()"></td>
-</tr>
-<tr>
-<td><img src = "./images/MT7.png" height = "20" width = "20" id = "id6" onclick= "scale6()"></td>
-<td><img src = "./images/MT8.png" height = "20" width = "20" id = "id7" onclick= "scale7()"></td>
-<td><img src = "./images/MT9.png" height = "20" width = "20" id = "id8" onclick= "scale8()"></td>
-<td><img src = "./images/MT10.png" height = "20" width = "20" id = "id9" onclick= "scale9()"></td>
-</tr>
-<tr><td><img src = "./images/MPR.png" height = "20" width = "20" id = "id11" onclick= "scale11()"></td>
-</tr>
+	
+<table border = "1" style = "text-align: center">
+	<tr>
+		<td>
+			Ron<br>Adds the minimum bet of 1 letter to the pot. Decides not to raise.
+		</td>
+		
+		<td>
+			The Pot<br>
+		</td>
+		
+		<td>
+			Harry<br>Adds the minumum bet of 1 letter to the pot. Also decides not to raise.
+		</td>
+	</tr>
+	<tr>
+		<td>Ron<br>Plays <i>Bombardo!</i>
+		</td>
+		<td>The Pot<br>
+			<img src= "./images/bombardi.png" width = "175px" height = "100px"/><br>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/><img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+			<img src= "./images/avis.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Harry<br>Plays <i>avis!</i>
+		</td>
+	</tr>
+	<tr><td colspan = "3">Harry's Snip-type spell Parries Ron's Paper-type spell (i.e. beats it).<br>
+	Only Harry's spell effect happens. Ron takes 1d6 damage (4).</td>
+	<tr>
+		<td>Ron<br>Believing they can win, Ron calls Harry's bet and adds 2 more letters.
+		</td>
+		<td>The Pot<br>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		</td>
+		<td>Harry<br>Seeing that Ron is low on health, Harry bets 2 letters.
+		</td>
+	</tr>
+	<tr>
+		<td>Ron<br>Plays <i>serpensentoria!</i>
+		</td>
+		<td>The Pot<br>
+			<img src= "./images/serpensortia.png" height = "100px" width = "175px" /><br>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+			<img src= "./images/avis.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Harry<br>Plays <i>avis!</i>
+		</td>
+	</tr>
+	<tr><td colspan = "3">Both Serpensortia and Avis are Snip-type spells. The spell with the highest speed rating (number in the top corner) would happen first, then the slower spell. In this case though, since they have the same speed, they cancel each other out and neither spell happens.</td></tr>
+	<tr>
+		<td>Ron<br>Feels like their luck is about to run out, but refuses to fold!
+		</td>
+		<td>The Pot<br>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		</td>
+		<td>Harry<br>Chooses not to bet.
+		</td>
+	</tr>
+	<tr>
+		<td>Ron<br>Plays <i>bat bogey hex!</i>
+		</td>
+		<td>The Pot<br>
+			<img src= "./images/batbogeyhex.png" width = "175px" height = "100px"/><br>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/>
+			<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+			<img src= "./images/incendio.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Harry<br>plays <i>incendio!</i>
+		</td>
+	</tr>
+	<tr><td colspan ="3">Ron catches a lucky break! Bat Bogey Hex beats incendio. Harry takes 1d6 damage. It rolls to 6 damage. Harry is reduced to 0Hp!<br>Ron wins the duel! Harry drops all the letters they collected and respawns in the Ballroom.<br>Ron gains 6 letters and now feels like they have enough letters to attempt the puzzle.<br>To the puzzle room! </td></tr>
 </table>
-</div>
+
+							
+						</div>
+						<br><br>
+						<div class = "middle2">
+<h3>Dueling with more than two players</h3>
+<p>
+	In this example, four players find themselves on the same map tile. Malfoy, the little shit, chose to duel, so everyone is drawn into a duel.<br>
+	Here is everyone's hands at the start of the duel:
+	<ul>
+		<li>Ron</li>
+		<ul>
+			<li>Spell Cards:<br> <img src= "./images/serpensortia.png" width = "175px" height = "100px"/>
+				<img src= "./images/opugno.png" width = "175px" height = "100px"/>
+				<img src= "./images/geminio.png" width = "175px" height = "100px"/>
+			<li>Letters: 6</li>
+			<li>Current HP: 2</li>
+		</ul>
+		<li>Hermione</li>
+		<ul>
+			<li>Spell Cards:<br> <img src= "./images/bombardi.png" width = "175px" height = "100px"/>
+				<img src= "./images/avis.png" width = "175px" height = "100px"/>
+				<img src= "./images/alarte.png" width = "175px" height = "100px"/>
+			<li>Letters: 14</li>
+			<li>Current HP: 4</li>
+		</ul>
+		<li>Harry</li>
+		<ul>
+			<li>Spell Cards:<br><img src= "./images/batbogeyhex.png" width = "175px" height = "100px"/>
+				<img src= "./images/eanesco.png" width = "175px" height = "100px"/>
+				<img src= "./images/bombardi.png" width = "175px" height = "100px"/>
+			<li>Letters: 10</li>
+			<li>Current HP: 5</li>
+		</ul>
+		<li>Malfoy</li>
+		<ul>
+			<li>Spell Cards:<br><img src= "./images/episkey.png" width = "175px" height = "100px"/>
+				<img src= "./images/serpensortia.png" width = "175px" height = "100px"/>
+				<img src= "./images/incendio.png" width = "175px" height = "100px"/>
+			<li>Letters: 2</li>
+			<li>Current HP: 2</li>
+		</ul>
+	</ul>
+</p>
+<table border = "1" style = "text-align: center">
+	<tr>
+		<td>Ron<br>
+			Places the minimum bet of 1 letter.<br>
+			Adds 1 more to call Malfoy's bet (note: Cannot fold on the first round)
+		</td>
+		<td>Hermione<br>
+			Places the minimum bet of 1 letter.<br>
+			Adds 1 more to call Malfoy's bet
+		</td>
+		<td>Harry<br>
+			Places the minimum bet of 1 letter.<br>
+			Adds 1 more to call Malfoy's bet
+		</td>
+		<td>Malfoy<br>
+			Places the minimum bet of 1 letter, and then raises 1 more letter.<br>
+			Malfoy is now out of letters. He is All In, but can still win the whole pot.
+		</td>
+	</tr>
+	<tr><td colspan = "4">
+		Current Pot<br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+	</td></tr>
+	<tr>
+		<td>Ron<br>
+			<img src= "./images/opugno.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Hermione<br>
+			<img src= "./images/avis.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Harry<br>
+			<img src= "./images/eanesco.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Malfoy<br>
+			<img src= "./images/episkey.png" width = "175px" height = "100px"/>
+		</td>
+	</tr>
+	<tr><td colspan = "4">
+		Current Pot<br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br><br>
+		The rare-type spells go first.<br>
+		Malfoy heals for 1d6 (4) and gets back to full health, then discards the spell card.<br>
+		Harry chooses Malfoy as the target for his spell and randomly chooses incedio to be discarded. This discards his own spell card.<br>
+		Malfoy now only has one spell!<br>
+		Since Rock beats Scissors, only Ron's spell happens! Ron deals 1d6 damage to every player - rolls 2 dmg.
+	</td></tr>
+	
+	<tr>
+		<td>Ron<br>
+			Ron bets 2 letters on the next round.
+		</td>
+		<td>Hermione<br>
+			Hermione calls Ron's bet.
+		</td>
+		<td>Harry<br>
+			Harry calls Ron's bet.
+		</td>
+		<td>Malfoy<br>
+			Malfoy stays in without needing to add any more letters, as he is already All In.
+		</td>
+	</tr>
+	<tr><td colspan = "4">
+		Current Pot<br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+	</td></tr>
+	
+	<td>Ron<br>
+			<img src= "./images/serpensortia.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Hermione<br>
+			<img src= "./images/bombardi.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Harry<br>
+			<img src= "./images/batbogeyhex.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Malfoy<br>
+			<img src= "./images/serpensortia.png" width = "175px" height = "100px"/>
+		</td>
+	</tr>
+	<tr><td colspan = "4">
+		Current Pot<br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br><br>
+		Since paper scissors beats paper, Ron, Harry and Malfoy's spells all trump Hermione's. Since all three spells also have the same speed value (because the spell cards are unfinished) all three spell effects are cancelled out. <br>
+		Since all three other spells cancelled each other out, Hermione's spell actually will happen!<br>
+		Hermione deals 1d6 damage to Ron, Harry, and Malfoy. She rolls a 6!<br>
+		Ron, Harry, and Malfoy are all dropped to 0HP! They loose all their letters and respawn in the ballroom.<br>
+		Hermione gains 18 letters!
+	</td></tr>
+</table>
+						</div>
+						<br><br>
+						<div class = "middle2">
+<h3>Dueling with Teams</h3>
+<p>
+	Once again, Ron, Harry, Hermione, and Malfoy have collided in the halls of the Magic Mansion. Figuring that little shit Malfoy is going to choose to duel out of spite, this time, everyone chooses to duel. This time, however, Ron and Harry are out for blood. At the announcement of the duel, they decide to team up.<br> 
+	Here is what everyone's inventory's look like at the start of the duel:
+	<ul>
+		<li>Ron</li>
+		<ul>
+			<li>Spell Cards:<br> <img src= "./images/impedimenta.png" width = "175px" height = "100px"/>
+				<img src= "./images/dissendium.png" width = "175px" height = "100px"/>
+				<img src= "./images/lumos.png" width = "175px" height = "100px"/>
+			<li>Letters: 4</li>
+			<li>Current HP: 3</li>
+		</ul>
+		<li>Hermione</li>
+		<ul>
+			<li>Spell Cards:<br> <img src= "./images/geminio.png" width = "175px" height = "100px"/>
+				<img src= "./images/avis.png" width = "175px" height = "100px"/>
+				<img src= "./images/alarte.png" width = "175px" height = "100px"/>
+			<li>Letters: 14</li>
+			<li>Current HP: 5</li>
+		</ul>
+		<li>Harry</li>
+		<ul>
+			<li>Spell Cards:<br><img src= "./images/batbogeyhex.png" width = "175px" height = "100px"/>
+				<img src= "./images/episkey.png" width = "175px" height = "100px"/>
+				<img src= "./images/eanesco.png" width = "175px" height = "100px"/>
+			<li>Letters: 2</li>
+			<li>Current HP: 5</li>
+		</ul>
+		<li>Malfoy</li>
+		<ul>
+			<li>Spell Cards:<br><img src= "./images/bombardi.png" width = "175px" height = "100px"/>
+				<img src= "./images/serpensortia.png" width = "175px" height = "100px"/>
+				<img src= "./images/incendio.png" width = "175px" height = "100px"/>
+			<li>Letters: 5</li>
+			<li>Current HP: 5</li>
+		</ul>
+	</ul>
+</p>
+</table>
+
+	<table border = "1" style = "text-align: center">
+	<tr>
+		<td colspan = "2">Ron and Harry<br>
+			Both Ron and Harry must place the minimum bet, as well as call and raise individually.<br>
+			When on a team, both players choose and play a spell, but will get to choose which one remains in play after seeing the other spells.
+		</td>
+		<td>Hermione<br>
+			Places the minimum bet of 1.
+		</td>
+		<td>Malfoy<br>
+			Places the minimum bet of 1.
+		</td>
+	</tr>
+	<tr><td colspan = "4">Current Pot<br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+	</td></tr>
+		
+	<tr>
+		<td colspan = "2">Ron and Harry<br>
+			<img src= "./images/lumos.png" width = "175px" height = "100px"/><br>
+			<img src= "./images/batbogeyhex.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Hermione<br>
+			<img src= "./images/alarte.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Malfoy<br>
+			<img src= "./images/serpensortia.png" width = "175px" height = "100px"/>
+		</td>
+	</tr>
+	<tr><td colspan = "4">Current Pot<br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		Ron and Harry have a choice to make. If they keep Lumos, then Malfoy's spell hits everyone. If they keep Bat Bogey Hex, the counter and cancel (because the speeds are the same) Malfoy's spell, and Hermione hits everyone.<br>
+		They choose to keep Bat Bogey Hex. Hermione's becomes the only spell not cancelled out and deals 1d6 to everyone. She rolls a 2. Ron is down to 1HP!
+	
+	</td></tr>
+	<tr>
+		<td colspan = "2">Ron and Harry<br>
+			Ron wants to raise the pot and adds 2 letters.<br>
+			Harry must also add 2 letters, but since Harry only had 1 letter left, he is now All In and essentially gets to stay in the duel for free.
+		</td>
+		<td>Hermione<br>
+			Hermione folds, bowing out of the duel having only lost 1 letter.
+		</td>
+		<td>Malfoy<br>
+			Malfoy calls the raise and adds 2 letters.
+		</td>
+	</tr>
+	<tr><td colspan = "4">Current Pot<br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+	</td></tr>
+	<tr>
+		<td colspan = "2">Ron and Harry<br>
+			<img src= "./images/dissendium.png" width = "175px" height = "100px"/><br>
+			<img src= "./images/batbogeyhex.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Hermione<br>
+			Folded
+		</td>
+		<td>Malfoy<br>
+			<img src= "./images/incendio.png" width = "175px" height = "100px"/>
+		</td>
+	</tr>
+	<tr><td colspan = "4">Current Pot<br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		Harry and Ron choose Dissendium, sensing that this duel is not going their way.<br>
+		Malfoy's spell deals 1d6 damage, dealing 2 dmg to both Ron and Harry!<br>
+		This drops Ron to 0HP, but with Dissendium active, he chooses to move to an adjacent room instead of dying.<br>
+		Ron is out of the duel! It's just Harry and Malfoy now.
+	</td></tr>
+	<tr>
+		<td>Harry<br>
+			Harry has no letters with which to bet, but wants revenge!
+		</td>
+		<td>Malfoy<br>
+			Harry doesn't have any more letters, so there is no reason for Malfoy to bet.
+		</td>
+	</tr>
+	<tr><td colspan = "4">Current Pot<br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+	</td></tr>
+	<tr>
+		<td>Harry<br>
+			<img src= "./images/episkey.png" width = "175px" height = "100px"/>
+		</td>
+		<td>Malfoy<br>
+			<img src= "./images/bombardi.png" width = "175px" height = "100px"/>
+		</td>
+	</tr>
+	<tr><td colspan = "4">Current Pot<br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/>
+		<img src= "./images/letter.png" height = "50px" width = "50px"/><br>
+		Harry heals for 1d6, but only rolls a 1.<br>
+		Malfoy's spell deals 1d6 damage and he rolls a 5! Harry is dropped to 0 HP.<br>
+		Since dissendium is still active, Harry flees to an adjacent room.<br>
+		Malfoy gains 9 letters.
+	</td></tr>
+</table>
 
 
-<!-- -------------------map end ------------------------ -->
+						</div>
+							<!-- 
+	**This is just to store the template**
+	<table border = "1">
+	<tr>
+		<td>Ron<br></td>
+		<td>The Pot<br></td>
+		<td>Harry<br></td>
+	</tr>
+	<tr>
+		<td>Ron<br></td>
+		<td>The Pot<br></td>
+		<td>Harry<br></td>
+	</tr>
+	<tr>
+		<td>Ron<br></td>
+		<td>The Pot<br></td>
+		<td>Harry<br></td>
+	</tr>
+</table>
+
+	<table border = "1">
+	<tr>
+		<td>Ron<br>
+		</td>
+		<td>Hermione<br>
+		</td>
+		<td>Harry<br>
+		</td>
+	</tr>
+	<tr><td colspan = "3">
+		
+	</td></tr>
+</table>
+
+							-->
+						<br>
+						<br>
+						<div class = "middle3">
+<h2>Rules</h2>
+
+	<p> <strong>Dueling Flowchart</strong><br>
+		<ol>
+			<li>All players must add the Minium Bet number of letters into the pot.</li>
+			<li>Any player can then bet, increasing the number of letters in the pot.</li>
+			<li>As with poker, all players in the Duel must then Call, Raise, or Fold.</li>
+				<dl><dt>Call</dt><dd>Match the amount of letters raised so you have added the same number of letters into the pot as the player who bet.</dd>
+				<dt>Raise</dt><dd>Increase the size of the bet further.</dd>
+				<dt>Fold</dt><dd>Leave the Duel, loosing the letters you have added to that point. Players cannot fold on the first round of the duel.</dd></dl>
+			<li>All players then select a spell card from their hand and play them at the same time.</li>
+			<li>For two-player duel, spells can either:</li>
+				<dl><dt>Counter</dt><dd>The spells have the same Type {R-R, P-P, S-S}. In this case, the spell with the highest Speed value happens first, then the slower spell. If both spells have the same speed value, then neither spell effect happens.</dd>
+				<dt>Parry</dt><dd>One spell's type beats the other {R-S, S-P, P-R}. Only the dominant spell's effect happens.</dd>
+				<dt>Rare Spells</dt><dd>Some spells do not have Types (Ex. The Killing Curse). Follow the description of the spell card to determine the outcome. Rare spells are single-use spells and must be discarded after using.</dd></dl>
+			<li>Resolve the outcome of each spell's effect when they are played. If a player is defeated (dropped to 0HP) before their spell effect happens (Countered by faster spell), then their spell does not happen.</li>
+			<li>If two or more players are still alive and in the room (have not teleported), then the Duel continues for another round. All players then have an opportunity to raise and subsequentyl call or fold.</li>
+			<li>There is only one winner of a duel (may be a team) and the pot is taken by the winner after the end of the duel (not after each round).</li>
+			<li><b>Duel end conditions:</b></li>
+				<ul><li>All but one player (or team) has been defeated (0HP)</li>
+				<li>All but one player (or team) has Folded</li>
+				<li>All but one player (or team) has left the room (via teleportation or spell effect)</li></ul>
+		</ol>
+	</p>
+
+	<p>
+		<strong>Dueling with Multiple Players and Teams</strong><br>
+		<ol>
+			<li>If any one player in a room chooses to duel, all players (and NPCs) in the room are drawn into a duel.</li>
+			<li>Before placing their Minimum Bets, any number of players can choose to Team Up. Teams cannot be formed once the duel has started</li>
+			<li>When on a team:</li>
+				<ul>
+					<li>All team members must place the Minumum Bet and Call all subsequent bets (including bets by their team member) to stay in the duel.</li>
+					<li>All team members must play a spell card, but the team gets to then choose which spell to remain in play after seeing the other spells played.</li>
+					<li>If any one member of a team takes damage, all members of the team must also take that damage. However, one team member can choose to take some or all of the damage that would have been taken by their comrade. (The team, as a collective, must take the full amount of damage).</li>
+					<li>If one member of a team Dies, Folds, or is forced All In (and looses), the remaining team members may remain in the duel.</li>
+					<li>If a team wins a duel, they can choose to divide the letters among the members as they please.</li>
+				</ul>
+			<li>When there are more than two players (or more than two teams) in a duel, all players reveal their spell cards at the same time. Once the teams have removed the spell card(s) they will not be using, the cards match up as follows:</li>
+				<dl>
+					<dt>All Counter</dt><dd>If all spells are the same, spell effects happen in order of speed. If any two spells have the same speed, those spells do not happen. Spell damage is dealt to all other players. Spell healing applies to all members of a team. Spell effects happen to all members of a team (one teleportation spells moves all members of the team).</dd>
+					<dt>One Parry</dt><dd>If one spell dominates all the others, only that spell happens and affects all other players.</dd>
+					<dt>Counter-Parry</dt><dd>If multiple spells are the dominant type and have different speeds, then only those spells happen and in order of their speeds.</dd>
+					<dt>Counter-Cancel</dt><dd>If multiple spells are dominant, but have the same speed, then neither dominant spell happens and the remaining spells in play happen instead, according to the spell pairings.</dd>
+					<dt>All Different</dt><dd>If all the spells are different types (rock, paper, and scissors) then resolve combinations of spells in order of speed.</dd>
+				</dl>
+			<li>Play continues until one of the end conditions is met.</li>
+		</ol>
+	</p>
+
+							</div>
+							<br>
+						<div class = "middle3">
+<h2>Solving the Puzzle</h2>		
+<p>
+	When a player feels like they have the letters they might need to solve the puzzle, they can make their way to the Puzzle Room and attempt to solve the puzzle.<br><br>
+	To solve the puzzle:
+	<ul>
+		<li>When in the puzzle room, choose the Puzzle Action.</li>
+		<li>If another player in the puzzle room chooses to duel, then the puzzle action is negated.</li>
+		<li>If more than one player chooses the puzzle action, they can choose either to:</li>
+		<ul>
+			<li>Solve the puzzle together (see Team Puzzling).</li>
+			<li>Or start a duel.</li>
+		</ul>
+		<li>A player than has four guesses at the puzzle (on a laptop). They can only guess using the letters they have collected.</li>
+		<li>Letters may be used multiple times in one word. If a player has an 'J', 'O', 'L', and 'Y' then they can guess 'Jolly' or 'Yolo' or 'Yoyo', etc.</li>
+		<li>If the puzzle is solved in four attempts, then the player gains 1 point and is ejected from the puzzle room.</li>
+		<li>If the puzzle is not solved in four attempts, the player is also ejected from the puzzle room.</li>
+		<li>Upon being ejected, the player must discard all their letters and respawn in the Ballroom.</li>
+		<li>Any progress made on the puzzle is saved, giving the next player a better chance of being able to solve it.</li>
+	</ul>
+Whenever the puzzle is solved:
+<ul>
+	<li>The player who solved it gains 1 point.</li>
+	<li>The puzzle advances automatically, with each subsequent word being one letter longer.</li>
+	<li>The board is refreshed:</li>
+	<ul><li>Place the max number of letters on each letter space.</li>
+	<li>Re-roll for NPCs on each NPC tile.</li>
+	<li>Increase the Minimum Bet by 1 letter.</li></ul>
+	<li>OPTION: Complete reset upon puzzle completion. All players return to their ballroom and all letters are discarded.</li>
+</ul>
+Team Puzzling: If more than one player chooses to attempt the puzzle at the same time, they can choose to solve it as a team.
+<ul>
+	<li>Both players' letters form a common pool of letters that can be used to solve the puzzle.</li>
+	<li>Players must alternate inputting guesses.</li>
+	<li>Only the player who enters in the correct guess gains the point.</li>
+	<li>Only four guesses can be made collectively. </li>
+	<li>If there are more than four players attempting the puzzle, then each player gets at least one guess.</li>
+</ul>
+
+<h3>The Letter Exchange Room</h3>
+In the letter exchange room, players can trade in three letters they have collected for a letter of their choice.<br>
+This may be done any number of times.<br>
+To exchange letters, choose the Puzzle Action in the LXCHANGE room.<br>
+Any number of players can exchange letters at the same time without conflict.
+</p>
+							</div>
+								<br>
+							<div class = "middle3">
+<h2>Moving and Searching</h2>
+<h3>Moving</h3>
+<p>
+	During the movement phase, all players reveal their choice of movement direction at the same time.<br>
+	Movement directions are always relative to the orientation of the Ballroom tile.<br>
+	<ul><caption>Players can choose to move in any direciton, as long as:</caption>
+	<li>The current map tile has a door facing in that direction</li>
+	<li>The map tile the player would move into has a door connected to a door on the current tile. (In other words, must move between rooms at points where the doors connect).</li>
+	</ul>
+	If there is no map tile out a door, draw the top map tile from the pile and add one with the doors connecting.<br>
+	After placing a new tile, fill in the letter spaces on the tile with letters, faced down.<br>
+	If the tile has an NPC box on it, roll 1d6 to see if an NPC spaws:
+	<ul>
+		<li>1: Spawn a Hunter. Hunters will always move towards the nearest player and always choose to duel when applicable..</li>
+		<li>2-5: Spawn a Normal NPC. Normal NPCs move randomly and always choose the duel action, when applicable.</li>
+		<li>6: Spawn a Friend. Friendly NPCs will not attack, but will defend themselves. Friends move randomly.</li>
+	</ul>
+								
+	If more than one player chooses to move in a direction that would add a map tile, work it out which way to place the drawn map tile.<br>
+	If there are no more map tiles, then treat doors to the void as walls.<br><br>
+	If a player chooses to Move an extra space as their move action, they may do so only if they are not in a room with someone who chose to duel. All players in the room are drawn into a duel, cancelling all other actions.							
+</p>
+<h3>Searching</h3>								
+<p>
+	Any room a player has moved into during the current round can be searched.<br>
+	After playing the Search action card, roll 1d6:
+	<ul>
+		<li>1-2: Take one letter from the letters on the tile. If there are no more letters on the tile, you cannot gain letters from this search action.</li>
+		<li>3-4: Take one letter from those on the tile and draw a Spell Card.</li>
+		<li>5-6: Take two letters from the tile and draw a Spell Card.</li>
+		<li>6:(Optional) Take all letters left on the tile.</li>
+	</ul>
+	If more than one player chooses to search the same room, but there are not enough letters for each player on the tile, then split the letters up evenly. (If it is not possible to split them evenly, then work something out. Maybe fight each other).							
+</p>							</div>
+	<br>
+							<div class = "middle3">
+<h2>Set up and other Rules</h2>
+<p>
+	<ul>
+		<li>Player start with 2d6 health</li>
+		<li>NPCs start with 1d6 health</li>
+		<li>On death, players discard all spell cards and letters</li>
+		<li>The letter exchange can be used as many times as desired on one turn. Letter exchanges happen on a 2 to 1 basis.</li>
+		<li>As NPCs move around, they gain 1 letter per sqaure they move onto.</li>
+	</ul>
+</p>
+							</div>
+								<br>
+							<div class = "middle3">
+								
+<h2>Alternative Gamemodes</h2>
+<h3>Playing with Teams</h3>
+<p>
+	If there are a large number of players, it may be best to start on two more teams of players.<br>
+	Each team starts the game in their own Ballroom tile, placed a couple of map tile away from each other.<br>
+	Team mates are automatically Teamed up at the start of any duels.
+</p>
+<h3>Playing against NPCs</h3>								
+<p>
+	There is also the option to play against the NPCs, trying to Solve the Puzzle as many times as you can before the NPCs hunt down all the player characters.
+</p>	
+							</div>
+								<br>
+							<div class = "middle3">
+<h2>Resources</h2>
+<p>
+	See the list below for all the resources needed to play the game and a brief explanation of how to use them. Open the links in a new tab, then save the file to your computer. The files should preserve their original types, but make sure the file types match (.c, .txt, .pdf, etc).<br>
+	Feel free to use change and update things as you see fit. The game is still changing and is far from being either complete of perfect.<br>
+	The only other thing you will need to play the game are game tokens, dice (d6s), and a set of scrabble letters.<br>
+	Enjoy!
+	<dl>
+		<dt><a href = "./wordle_final_onlineversion.c">Wordle.c</a></dt>
+		<dd>This file contains the (C) code for the wordle game. Download the file, but DO NOT OPEN IT. Upload the file to an Online C Compiler (see link below) along with he Dictionary_WMM.txt file. Make sure that the online compiler contains only these two tabs. Make sure the compiler language is set to 'C' (in top right). Then hit the Play button in the top left corner to run the program. Enter guesses in the comman window below where the output messages are displayed.</dd>
+		<dt><a href = "https://www.onlinegdb.com/online_c_compiler">Online C Compiler</a></dt>
+		<dd>This links to an online C compiler. You can use this to run the Wordle program. Make sure the language in the top right is set to 'C'. Delete all contents from the initial window. Use the 'Upload File' button in the top left to add the Wordle.c file and the Dictionary_WMM.txt files to the website. Then press the play button in the top left to run the program. Enter your guesses in the bottom command window.</dd>
+		<dt><a href = "./Dictionary_WMM.txt">Dictionary_WMM.txt</a></dt>
+		<dd>The text file with all of the Christmas Themed words. Download this file and upload to an online C compiler, along with the wordle.c file for Wordle to work. WARNING: Do not change the name of the file. It must be the same for the code to work.</dd>
+		<dt><a href = "./Maptiles_WMM.pdf">Map_Tiles.pdf</a></dt>
+		<dd>Pdf file containing the map tiles in a printable format</dd>
+		<dt><a href = "./Mvmt_Action_WMM.pdf">Movement_and_Action_Cards.pdf</a></dt>
+		<dd>Pdf file containing the the movement and action cards in a printable format.</dd>
+		<dt><a href = "./WMM_SpellCards.pdf">SpellCards_WMM.pdf</a></dt>
+		<dd>Pdf of the spell cards in a printable format.</dd>
+		<dt><a href = "./Wordle_Magic_Mansion.xlsx">Wordle_Magic_Mansion.xlsx</a></dt>
+		<dd>A very large excel file containing all the raw material, including map tiles, spells, and rules. Note that the rules in the excel file are an old version. The website contains the most recent rule set.</dd>
+	</dl>
+</p>
 
 
-<script>
-function scale1()
-{
-	var div1 = document.getElementById("id1");
+							</div>
 	
-	div1.style.transform = 'scale(10)';
-	
-}
-
-function scale2()
-{
-	var div1 = document.getElementById("id2");
-	
-	div1.style.transform = 'scale(10)';
-
-}
-function scale3()
-{
-	var div1 = document.getElementById("id3");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale4()
-{
-	var div1 = document.getElementById("id4");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale5()
-{
-	var div1 = document.getElementById("id5");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale6()
-{
-	var div1 = document.getElementById("id6");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale7()
-{
-	var div1 = document.getElementById("id7");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale8()
-{
-	var div1 = document.getElementById("id8");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale9()
-{
-	var div1 = document.getElementById("id9");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale10()
-{
-	var div1 = document.getElementById("id10");
-	
-	div1.style.transform = 'scale(10)';
-}
-function scale11()
-{
-	var div1 = document.getElementById("id11");
-	
-	div1.style.transform = 'scale(10)';
-}
-</script>
-
 </body></html>
